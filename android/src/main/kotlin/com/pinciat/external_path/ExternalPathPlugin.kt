@@ -12,6 +12,7 @@ import android.content.Context
 import java.io.File
 import io.flutter.plugin.common.PluginRegistry.Registrar
 import android.os.Build
+import androidx.annotation.RequiresApi
 import kotlin.collections.ArrayList 
 
 /** ExternalPathPlugin */
@@ -37,6 +38,7 @@ class ExternalPathPlugin: FlutterPlugin, MethodCallHandler {
     }
   }
 
+  @RequiresApi(Build.VERSION_CODES.KITKAT)
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
      when(call.method) {
           "getExternalStorageDirectories" -> result.success(getExternalStorageDirectories())
@@ -45,6 +47,7 @@ class ExternalPathPlugin: FlutterPlugin, MethodCallHandler {
      }
   }
 
+ @RequiresApi(Build.VERSION_CODES.KITKAT)
  fun getExternalStorageDirectories() : ArrayList<String> {
     val appsDir: Array<File> = context.getExternalFilesDirs(null)
     var extRootPaths: ArrayList<String> = ArrayList<String>()
